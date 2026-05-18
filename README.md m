@@ -1,0 +1,192 @@
+Bank Management System – README
+Project Overview
+
+This project is a Bank Management System developed in C using binary file handling and random-access file concepts. The program allows users to create, update, delete, and manage bank account records efficiently.
+
+The system stores account information in a binary file (credit.dat) and supports transaction history management.
+
+Features
+Create new bank accounts
+Deposit money
+Withdraw money
+Delete accounts
+View account details
+View transaction history
+Export account records to a text file
+Random-access file handling
+Persistent data storage using binary files
+Technologies Used
+Programming Language: C
+File Handling: Binary Files
+Concepts Used:
+Structures
+Random Access Files
+Functions
+Arrays
+File I/O Operations
+File Structure
+Main Files
+File Name	Purpose
+bank.c	Main source code
+credit.dat	Binary file storing account data
+accounts.txt	Exported text report
+Data Structures
+Transaction Structure
+struct Transaction
+{
+    char type[20];
+    double amount;
+};
+
+Stores:
+
+Transaction type
+Transaction amount
+Client Structure
+struct clientData
+{
+    unsigned int acctNum;
+    char lastName[15];
+    char firstName[10];
+    double balance;
+
+    struct Transaction history[MAX_TRANS];
+    int transCount;
+};
+
+Stores:
+
+Account number
+Customer name
+Balance
+Transaction history
+Program Functionalities
+1. Add New Account
+
+Creates a new account with:
+
+Account number
+Customer name
+Initial balance
+
+The account is stored directly in the binary file.
+
+2. Deposit / Withdraw
+
+Allows users to:
+
+Deposit money
+Withdraw money
+
+The balance is updated automatically.
+
+Every transaction is stored in transaction history.
+
+3. Delete Account
+
+Deletes an account by replacing its data with an empty record.
+
+4. View Account Details
+
+Displays:
+
+Account number
+Customer name
+Current balance
+5. View Transaction History
+
+Displays all stored transactions for an account.
+
+Example:
+
+1. Initial    1000.00
+2. Deposit     500.00
+3. Withdraw    200.00
+6. Export Accounts
+
+Creates a formatted text file named:
+
+accounts.txt
+
+This file contains all active account records.
+
+Random Access File Concept
+
+The program uses random-access file handling.
+
+Using fseek(), the program directly accesses a specific account record without reading the entire file.
+
+Example:
+
+fseek(fPtr,
+      (account - 1) * sizeof(struct clientData),
+      SEEK_SET);
+
+This improves efficiency and speed.
+
+File Handling Functions Used
+Function	Purpose
+fopen()	Open file
+fclose()	Close file
+fread()	Read binary data
+fwrite()	Write binary data
+fseek()	Move file pointer
+rewind()	Move pointer to beginning
+Compilation Instructions
+Using GCC
+
+Compile:
+
+gcc bank.c -o bank
+
+Run on Linux/macOS:
+
+./bank
+
+Run on Windows:
+
+bank.exe
+Sample Menu
+===== BANK MANAGEMENT SYSTEM =====
+
+1. Add New Account
+2. Deposit / Withdraw
+3. Delete Account
+4. View Account
+5. View Transaction History
+6. Export Accounts to Text File
+7. Exit
+Advantages of the System
+Fast record access
+Persistent storage
+Simple and efficient design
+Easy to understand
+Demonstrates file handling concepts clearly
+Limitations
+Fixed transaction history size
+No password protection
+No database integration
+Console-based interface only
+Future Enhancements
+
+Possible improvements include:
+
+User authentication
+Admin login system
+Date and time for transactions
+Money transfer between accounts
+Dynamic transaction storage
+Search by customer name
+GUI interface
+Database connectivity
+Data encryption
+Conclusion
+
+This Bank Management System demonstrates the practical implementation of:
+
+Structures
+Binary file handling
+Random-access files
+File operations in C
+
+The project is suitable for learning advanced file handling concepts and building basic banking applications in C.
